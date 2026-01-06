@@ -15,6 +15,9 @@ export class UserService {
         return this.userModel.find().exec();
     }
 
+    async findUserByPhoneNumber(phoneNumber: string): Promise<User | null> {
+        return this.userModel.findOne({ phoneNumber }).exec();
+    }
     async getUserById(id: string): Promise<User | null> {
         return this.userModel.findById(id).exec();
     }
