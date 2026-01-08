@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { LoginDto } from "./dto/login.dto";
 import { RegisterDto } from "./dto/register.dto";
 import { UserService } from "@/users/user.service";
-import { HashService } from "@/common/crypto/hash.services";
+import { HashService } from "@/common/crypto/hash.service";
 
 @Injectable()
 export class AuthService{
