@@ -1,14 +1,15 @@
 import { Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
+import * as jwt from 'jsonwebtoken';
 
 @Injectable()
 export class TokenService {
-    generateToken(payload: any): string {
-        // Implementation for generating a token (e.g., JWT)
-        return "generated-token";
+    constructor(private readonly config: ConfigService) {}
+    generateToken(userId: string): string {
+        return jwt.sign({sub : userId}, this.config.getOrThrow<string>('JWT_ACCESS_SECRET'), { expiresIn: '15m' });
     }
 
     verifyToken(token: string): any {
-        // Implementation for verifying a token (e.g., JWT)
-        return { userId: 1 }; // Example payload
+        return jwt.verify(token, this.config.getOrThrow<string>('JWT_ACCESS_SECRET'));
     }
 }
